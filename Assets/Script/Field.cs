@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Field : MonoBehaviour
 {
-    List<Bate> bates = new List<Bate>();
+    List<Bait> baits = new List<Bait>();
 
     // Update is called once per frame
     void Update()

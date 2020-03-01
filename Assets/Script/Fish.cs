@@ -4,63 +4,85 @@ using UnityEngine;
 
 public class Fish : MonoBehaviour
 {
-    Vector3 bateDirection;
+    Vector3 baitDirection;
+    Bait bait;
     bool isGrounded;
+    bool canEatBait;
 
-    public float moveStep = 1.0f;
+    public float moveStepUp = 1.0f;
+    public float moveStepDown = 1.0f;
+    public float moveStepSide = 1.0f;
     public Transform underWaterGround;
-    public GameObject Bate;
+    public GameObject baitObject;
 
     void Start()
     {
         isGrounded = false;
+        canEatBait = false;
+        bait = baitObject.GetComponent<Bait>();
     }
 
-    void Update()
+    public void MoveUp(bool inputUp)
     {
-        Move();
-    }
-
-
-
-    void Move()
-    {
-        // Move towards bate
-        if (Input.GetKey(KeyCode.UpArrow))
+        SetBait(baitObject);
+        if (isGrounded)
         {
-            Debug.Log("Bate");
-            SetBate(Bate);
-            transform.position += bateDirection * moveStep * Time.deltaTime;
+            isGrounded = false;
         }
-
-        // Move towards ground
-        if (Input.GetKey(KeyCode.DownArrow) && !isGrounded)
+        if (inputUp)
         {
-            Debug.Log("Return");
-            transform.position += (underWaterGround.position - transform.position) * moveStep * Time.deltaTime;
+            transform.position += baitDirection * moveStepUp * Time.deltaTime;
         }
-
-        // Move Horizontaly
-        transform.position += new Vector3(Input.GetAxis("Horizontal") * moveStep, 0);
     }
 
-    private void SetBate(GameObject bate)
+    public void MoveDown(bool inputDown)
+    {
+        if (inputDown && !isGrounded)
+        {
+            transform.position += (underWaterGround.position - transform.position) * moveStepDown * Time.deltaTime;
+        }
+    }
+
+    public void MoveSide(float inputSide)
+    {
+        transform.position += new Vector3(inputSide * moveStepSide * Time.deltaTime, 0);
+    }
+
+    public void EatBait(bool inputSpace)
+    {
+        if (inputSpace && canEatBait)
+        {
+            bait.UpdateHP();
+        }
+    }
+
+    private void SetBait(GameObject baitObj)
     {
 
-        bateDirection = bate.transform.position - transform.position;
+        baitDirection = baitObj.transform.position - transform.position;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.name);
-        bateDirection = other.gameObject.transform.position - transform.position;
+        if (other.tag == "Bait")
+        {
+            canEatBait = true;
+            bait.SetState(Bait.STATE.STOP);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Bait")
+        {
+            canEatBait = false;
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "UnderWaterOrigin")
         {
-            Debug.Log("UnderWaterOrigin");
             isGrounded = true;
         }
     }
