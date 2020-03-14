@@ -56,6 +56,14 @@ public class Fish : MonoBehaviour
         }
     }
 
+    public void EatBait1(bool input1)
+    {
+        if (input1)
+        {
+            bait.BaitEaten(1);
+        }
+    }
+
     private void SetBait(GameObject baitObj)
     {
 
