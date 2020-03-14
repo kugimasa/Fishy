@@ -30,7 +30,7 @@ public class Bait : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
+        Debug.Log(transform.position.y);
         if (transform.position.y <= boarderY)
         {
             state = STATE.STOP;
@@ -41,10 +41,10 @@ public class Bait : MonoBehaviour
             case STATE.STOP:
                 break;
             case STATE.PULL:
-                transform.Translate(0, pullStep, 0);
+                transform.Translate(0, 0, pullStep);
                 break;
             case STATE.DROP:
-                transform.Translate(0, -dropStep, 0);
+                transform.Translate(0, 0, -dropStep);
                 break;
             default:
                 break;
