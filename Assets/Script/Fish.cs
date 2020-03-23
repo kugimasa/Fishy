@@ -8,6 +8,8 @@ public class Fish : MonoBehaviour
     Bait bait;
     bool isGrounded;
     bool canEatBait;
+    Animation animation;
+    Transform fishBone;
 
     public float moveStepUp = 1.0f;
     public float moveStepDown = 1.0f;
@@ -20,10 +22,13 @@ public class Fish : MonoBehaviour
         isGrounded = false;
         canEatBait = false;
         bait = baitObject.GetComponent<Bait>();
+        animation = GetComponent<Animation>();
+        fishBone = transform.GetChild(0).gameObject.transform;
     }
 
     public void MoveUp(bool inputUp)
     {
+        Vector3 fishAngle = fishBone.localEulerAngles;
         SetBait(baitObject);
         if (isGrounded)
         {
@@ -31,21 +36,42 @@ public class Fish : MonoBehaviour
         }
         if (inputUp)
         {
+            fishBone.localEulerAngles = new Vector3(-15f, fishAngle.y, fishAngle.z);
             transform.position += baitDirection * moveStepUp * Time.deltaTime;
         }
     }
 
     public void MoveDown(bool inputDown)
     {
+        Vector3 fishAngle = fishBone.localEulerAngles;
         if (inputDown && !isGrounded)
         {
+            fishBone.localEulerAngles = new Vector3(15f, fishAngle.y, fishAngle.z);
             transform.position += (underWaterGround.position - transform.position) * moveStepDown * Time.deltaTime;
+        }
+    }
+
+    public void RotationXIdle(bool inputUp, bool inputDown)
+    {
+        Vector3 fishAngle = fishBone.localEulerAngles;
+        if (!inputUp && !inputDown)
+        {
+            fishBone.localEulerAngles = new Vector3(0.0f, fishAngle.y, fishAngle.z);
         }
     }
 
     public void MoveSide(float inputSide)
     {
+        animation.Play();
         transform.position += new Vector3(inputSide * moveStepSide * Time.deltaTime, 0);
+        if (inputSide > 0.0f)
+        {
+            fishBone.localEulerAngles = new Vector3(0f, 0f ,0f);
+        }
+        else if(inputSide < 0.0f)
+        {
+            fishBone.localEulerAngles = new Vector3(0.0f, 180.0f, 0.0f);
+        }
     }
 
     public void EatBait(bool inputSpace)
