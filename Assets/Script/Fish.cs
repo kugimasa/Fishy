@@ -8,7 +8,7 @@ public class Fish : MonoBehaviour
     Bait bait;
     bool isGrounded;
     bool canEatBait;
-    Animation animation;
+    Animator animator;
     Transform fishBone;
 
     public float moveStepUp = 1.0f;
@@ -22,7 +22,7 @@ public class Fish : MonoBehaviour
         isGrounded = false;
         canEatBait = false;
         bait = baitObject.GetComponent<Bait>();
-        animation = GetComponent<Animation>();
+        animator = GetComponent<Animator>();
         fishBone = transform.GetChild(0).gameObject.transform;
     }
 
@@ -62,13 +62,12 @@ public class Fish : MonoBehaviour
 
     public void MoveSide(float inputSide)
     {
-        animation.Play();
         transform.position += new Vector3(inputSide * moveStepSide * Time.deltaTime, 0);
         if (inputSide > 0.0f)
         {
-            fishBone.localEulerAngles = new Vector3(0f, 0f ,0f);
+            fishBone.localEulerAngles = new Vector3(0.0f, 0.0f, 0.0f);
         }
-        else if(inputSide < 0.0f)
+        else if (inputSide < 0.0f)
         {
             fishBone.localEulerAngles = new Vector3(0.0f, 180.0f, 0.0f);
         }

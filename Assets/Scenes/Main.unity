@@ -1088,6 +1088,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3277498873176745387, guid: ec8dcc87efb5643beb75922c8766c42a,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3277498873176745387, guid: ec8dcc87efb5643beb75922c8766c42a,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3277498873176745387, guid: ec8dcc87efb5643beb75922c8766c42a,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 5158071128835746607, guid: ec8dcc87efb5643beb75922c8766c42a,
         type: 3}
       propertyPath: m_LocalRotation.x
@@ -1118,6 +1133,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5699326330618717459, guid: ec8dcc87efb5643beb75922c8766c42a,
+        type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5699326330618717459, guid: ec8dcc87efb5643beb75922c8766c42a,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 865f417acca934eefb00b3861093f18d, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ec8dcc87efb5643beb75922c8766c42a, type: 3}
 --- !u!1 &8296172667997867832 stripped
@@ -1126,22 +1151,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 7271242015291749698}
   m_PrefabAsset: {fileID: 0}
---- !u!111 &8296172667997867833
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8296172667997867832}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 31d68bfe245b044a2ae66929dbd2c55f, type: 2}
-  m_Animations:
-  - {fileID: 7400000, guid: 31d68bfe245b044a2ae66929dbd2c55f, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 1
-  m_CullingType: 0
 --- !u!1 &8296172669020937446 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1120028424375551329, guid: 564fe05442d1d44e1a759311e5dce825,
